@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-native';
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Decks',
   };
   render() {
     const {navigate} = this.props.navigation;

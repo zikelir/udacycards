@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {
   createStackNavigator,
@@ -7,20 +8,31 @@ import {
 import HomeScreen from './views/home/home.js'
 import DeckScreen from './views/deck/deck.js'
 
+import { fontAwesome, Ionicons } from '@expo/vector-icons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 const HomeStack = createStackNavigator({
   Home:  HomeScreen,
-  Settings: 'dssda'
 });
 
 const DeckStack = createStackNavigator({
   Deck:  DeckScreen,
-  Settings: 'dssda'
 });
 
 const App = createAppContainer(
   createBottomTabNavigator({
-    Home: HomeStack,
-    Deck: DeckStack
+    Home: {
+      screen: HomeStack,
+      navigationOptions: {
+        tabBarIcon: () => <FontAwesome name="home" size={30} color='black' />
+      }
+    },
+    Deck: {
+      screen: DeckStack,
+      navigationOptions: {
+        tabBarIcon: () => <FontAwesome name="home" size={30} color='black' />
+      }
+    }
   }));
 
 export default App;
