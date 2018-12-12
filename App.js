@@ -8,8 +8,7 @@ import {
 import HomeScreen from './views/home/home.js'
 import DeckScreen from './views/deck/deck.js'
 
-import { fontAwesome, Ionicons } from '@expo/vector-icons';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const HomeStack = createStackNavigator({
   Home:  HomeScreen,
@@ -24,13 +23,13 @@ const App = createAppContainer(
     Home: {
       screen: HomeStack,
       navigationOptions: {
-        tabBarIcon: () => <FontAwesome name="home" size={30} color='black' />
+        tabBarIcon: () => <MaterialCommunityIcons name="home" size={30} color='black' />
       }
     },
     Deck: {
       screen: DeckStack,
       navigationOptions: {
-        tabBarIcon: () => <FontAwesome name="home" size={30} color='black' />
+        tabBarIcon: () => <MaterialCommunityIcons name="cards-playing-outline" size={30} color='black' />
       }
     }
   }));

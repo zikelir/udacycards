@@ -1,18 +1,29 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Button, Text, ScrollView, StyleSheet } from 'react-native';
 class DeckScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Deck',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
   };
   render() {
-    const {navigate} = this.props.navigation;
     return (
-      <Button
-        title="Go to Jane's dsadsaprofile"
-        onPress={() => navigate('Home', {name: 'Jayiuhune'})}
-      />
+      <ScrollView>
+        
+      </ScrollView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    backgroundColor: 'white'
+  }
+});
 
 export default DeckScreen;
