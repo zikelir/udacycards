@@ -1,37 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {
-  createStackNavigator,
-  createBottomTabNavigator,
-  createAppContainer
-} from 'react-navigation';
-import HomeScreen from './views/home/home.js'
-import DeckScreen from './views/deck/deck.js'
+import { View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducer/index';
+import NavigatorComponent from './elements/navigatorComponent/NavigatorComponent';
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
-const HomeStack = createStackNavigator({
-  Home:  HomeScreen,
-});
-
-const DeckStack = createStackNavigator({
-  Deck:  DeckScreen,
-});
-
-const App = createAppContainer(
-  createBottomTabNavigator({
-    Home: {
-      screen: HomeStack,
-      navigationOptions: {
-        tabBarIcon: () => <MaterialCommunityIcons name="home" size={30} color='black' />
-      }
-    },
-    Deck: {
-      screen: DeckStack,
-      navigationOptions: {
-        tabBarIcon: () => <MaterialCommunityIcons name="cards-playing-outline" size={30} color='black' />
-      }
-    }
-  }));
-
-export default App;
+export default class App extends React.Component{
+  render() {
+    return (
+      <Provider store={createStore(rootReducer)}>
+          <NavigatorComponent />
+      </Provider>
+    )
+  }
+}
