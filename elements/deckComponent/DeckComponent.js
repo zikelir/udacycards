@@ -2,11 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 class DeckComponent extends React.Component {
+  constructor(props) {
+    super(props);
+      this.state = {
+    };
+  }
+
   render() {
-    const deckTitle = 'foo';
     return (
       <View style={styles.deckCard}>
-        
+        <Text>Deck {this.props.deckList.name}</Text>
         <Button title="see" onPress={() => {}}/>
       </View>
     );

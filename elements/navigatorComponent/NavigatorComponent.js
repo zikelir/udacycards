@@ -5,8 +5,9 @@ import {
   createBottomTabNavigator,
   createAppContainer
 } from 'react-navigation';
-import HomeScreen from '../../views/home/home.js'
-import DeckScreen from '../../views/deck/deck.js'
+import HomeScreen from '../../views/home/home.js';
+// import DeckScreen from '../../views/deck/deck.js';
+import AddDeckScreen from '../../views/addDeck/addDeck'
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -14,8 +15,12 @@ const HomeStack = createStackNavigator({
   Home:  HomeScreen,
 });
 
-const DeckStack = createStackNavigator({
-  Deck:  DeckScreen,
+// const DeckStack = createStackNavigator({
+//   Deck:  DeckScreen,
+// });
+
+const AddDeckStack = createStackNavigator({
+  AddDeck:  AddDeckScreen,
 });
 
 const NavigatorComponent = createAppContainer(
@@ -26,10 +31,16 @@ const NavigatorComponent = createAppContainer(
         tabBarIcon: () => <MaterialCommunityIcons name="home" size={30} color='black' />
       }
     },
-    Deck: {
-      screen: DeckStack,
+    // Deck: {
+    //   screen: DeckStack,
+    //   navigationOptions: {
+    //     tabBarIcon: () => <MaterialCommunityIcons name="cards-playing-outline" size={30} color='black' />
+    //   }
+    // },
+    AddDeck: {
+      screen: AddDeckStack,
       navigationOptions: {
-        tabBarIcon: () => <MaterialCommunityIcons name="cards-playing-outline" size={30} color='black' />
+        tabBarIcon: () => <MaterialCommunityIcons name="playlist-plus" size={30} color='black' />
       }
     }
   }));
