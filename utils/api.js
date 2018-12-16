@@ -12,7 +12,7 @@ export const initialArr = async () => {
 export const asyncSaveDeck  = async (deck) => {
   try {
     await AsyncStorage.setItem('decks', JSON.stringify(deck));
-    console.log(deck);
+    // console.log(deck);
     alert('Deck Submited!!');
   } catch (error) {
     // Error saving data
@@ -32,7 +32,6 @@ export const asyncGetAll = async () => {
         // get at each store's key/value so you can work with it
         let key = store[i][0];
         let value = store[i][1];
-        console.log(value);
       });
     });
   });
@@ -41,4 +40,5 @@ export const asyncGetAll = async () => {
 export const asyncDeleteDecks = async () => {
   const decks = await AsyncStorage.clear();
   alert('deleted all decks');
+  return decks;
 }

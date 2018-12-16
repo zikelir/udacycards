@@ -1,12 +1,19 @@
 
-import { ADD_DECK } from '../actions/decksAction';
+import { ADD_DECK, GET_DECKS } from '../actions/decksAction';
+const initialState = {
+  deckList: []
+}
 
-function decksReducer(state = {}, action) {
+function decksReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_DECK :
       return {
         ...state,
-        decks: decks.push(action.deck)
+       deckList: [...state.deckList, action.payload.deck]
+      }
+    case GET_DECKS :
+      return {
+        ...state
       }
     default :
       return state

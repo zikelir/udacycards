@@ -8,10 +8,16 @@ class DeckComponent extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.deck.deckName !== nextProps.deckName) {
+      return true
+    }
+  }
+
   render() {
     return (
-      <View style={styles.deckCard}>
-        <Text>Deck {this.props.deckList.name}</Text>
+      <View style={styles.deckCard} key={this.props.deck.id}>
+        <Text>Deck {this.props.deck.deckName}</Text>
         <Button title="see" onPress={() => {}}/>
       </View>
     );

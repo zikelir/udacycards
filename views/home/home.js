@@ -1,27 +1,48 @@
 import React from 'react';
-import { Button, Text, ScrollView, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
 import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckList: ''
+      deckList: []
     };
   }
 
   componentDidMount() {
     asyncGetDecks().then((result) => {
-      console.log(result, 'res');
       if(result === null) {
         console.log('not');
         initialArr();
       }
     });
 
-    asyncGetAll().then((result) => {
-      console.log(result);
+    asyncGetDecks().then((result) => {
+      this.setState({deckList: result});
     });
+   }
+
+   componentWillReceiveProps(nextProps) {
+     if(this.props.deckList !== nextProps.deckList) {
+      asyncGetDecks().then((result) => {
+          this.setState({deckList: result});
+        });
+       return true;
+     }
+   }
+
+   generateDeckComponent = (deckList) => {
+     if(deckList.length > 0) {
+      deckList.map(item => {
+        // console.log(item);
+        return <Text>{item.deckName}</Text>
+        // return (<View><DeckComponent deck={item}/></View>);
+       })
+     } else {
+       return <Text>Sorry But no decks :(</Text>
+     }
    }
 
   static navigationOptions = {
@@ -38,7 +59,9 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        {/* <DeckComponent deckList={this.state.deckList}/> */}
+        { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
+        return (<DeckComponent deck={item} key={'dckcmp'+ item.id}/>);
+       }) : <Text>Sorry but no cards</Text> }
         <Button title="Delete all" onPress={() => asyncDeleteDecks()}/>
       </ScrollView>
     );
@@ -51,4 +74,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+const mapStateToProps = (state) => {
+  return {
+    deckList: state.decksReducer.deckList
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
