@@ -12,7 +12,6 @@ export const initialArr = async () => {
 export const asyncSaveDeck  = async (deck) => {
   try {
     await AsyncStorage.setItem('decks', JSON.stringify(deck));
-    // console.log(deck);
     alert('Deck Submited!!');
   } catch (error) {
     // Error saving data

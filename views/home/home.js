@@ -16,7 +16,6 @@ class HomeScreen extends React.Component {
   componentDidMount() {
     asyncGetDecks().then((result) => {
       if(result === null) {
-        console.log('not');
         initialArr();
       }
     });
@@ -32,18 +31,6 @@ class HomeScreen extends React.Component {
           this.setState({deckList: result});
         });
        return true;
-     }
-   }
-
-   generateDeckComponent = (deckList) => {
-     if(deckList.length > 0) {
-      deckList.map(item => {
-        // console.log(item);
-        return <Text>{item.deckName}</Text>
-        // return (<View><DeckComponent deck={item}/></View>);
-       })
-     } else {
-       return <Text>Sorry But no decks :(</Text>
      }
    }
 
@@ -67,9 +54,9 @@ class HomeScreen extends React.Component {
     return (
       <ScrollView styles={styles.contentContainer}>
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
-          return (<DeckComponent deck={item} key={'dckcmp'+ item.id}/>);
+          return (<DeckComponent deck={item} key={'dckcmp'+ item.id} navigate={this.props.navigation.navigate}/>);
         }) : <Text style={{margin: 8, fontWeight: 'bold'}}>Sorry but no cards</Text> }
-        <View style={{margin: 8}}><Button title="Delete all" onPress={() => this.deleteAll()}/></View>
+        <View style={{margin: 8}}><Button title="Delete all" onPress={() => this.deleteAll()} color='red'/></View>
       </ScrollView>
     );
   }
