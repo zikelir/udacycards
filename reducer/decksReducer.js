@@ -1,7 +1,8 @@
 
-import { ADD_DECK, GET_DECKS } from '../actions/decksAction';
+import { ADD_DECK, GET_DECKS, DELETE_DECKS, SET_SELECTED_DECK } from '../actions/decksAction';
 const initialState = {
-  deckList: []
+  deckList: [],
+  selectedDeck: ''
 }
 
 function decksReducer(state = initialState, action) {
@@ -14,6 +15,17 @@ function decksReducer(state = initialState, action) {
     case GET_DECKS :
       return {
         ...state
+      }
+    case SET_SELECTED_DECK :
+      return {
+        ...state,
+        selectedDeck: action.payload.selectedDeck
+      }
+    case DELETE_DECKS :
+      return {
+        ...state,
+        selectedDeck: '',
+        deckList: [],
       }
     default :
       return state

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
 import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
+import { deleteDecks } from '../../actions/decksAction';
+
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +47,11 @@ class HomeScreen extends React.Component {
      }
    }
 
+   deleteAll = () => {
+     this.props.delete();
+     asyncDeleteDecks();
+   }
+
   static navigationOptions = {
     title: 'Decks',
     headerStyle: {
@@ -62,7 +69,7 @@ class HomeScreen extends React.Component {
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
           return (<DeckComponent deck={item} key={'dckcmp'+ item.id}/>);
         }) : <Text style={{margin: 8, fontWeight: 'bold'}}>Sorry but no cards</Text> }
-        <View style={{margin: 8}}><Button title="Delete all" onPress={() => asyncDeleteDecks()}/></View>
+        <View style={{margin: 8}}><Button title="Delete all" onPress={() => this.deleteAll()}/></View>
       </ScrollView>
     );
   }
@@ -70,12 +77,16 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    color: 'red'
+    color: 'white'
   }
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    delete: () => {
+      dispatch(deleteDecks());
+    }
+  }
 }
 
 const mapStateToProps = (state) => {
