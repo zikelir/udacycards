@@ -58,11 +58,11 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.contentContainer}>
+      <ScrollView styles={styles.contentContainer}>
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
-        return (<DeckComponent deck={item} key={'dckcmp'+ item.id}/>);
-       }) : <Text>Sorry but no cards</Text> }
-        <Button title="Delete all" onPress={() => asyncDeleteDecks()}/>
+          return (<DeckComponent deck={item} key={'dckcmp'+ item.id}/>);
+        }) : <Text style={{margin: 8, fontWeight: 'bold'}}>Sorry but no cards</Text> }
+        <View style={{margin: 8}}><Button title="Delete all" onPress={() => asyncDeleteDecks()}/></View>
       </ScrollView>
     );
   }
@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    backgroundColor: 'white'
+    color: 'red'
   }
 });
 

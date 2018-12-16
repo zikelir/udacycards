@@ -18,7 +18,7 @@ class DeckComponent extends React.Component {
     console.log(this.props.deck);
     return (
       <View style={styles.deckCard} key={this.props.deck.id}>
-        <Text>Deck {this.props.deck.deckName}</Text>
+        <Text>Deck name: {this.props.deck.deckName}</Text>
         <Text>Number of questions: {this.props.deck.questions.length}</Text>
         <Button title="see" onPress={() => {}}/>
       </View>
