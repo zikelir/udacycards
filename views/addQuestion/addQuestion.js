@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
-import { addDeck } from '../../actions/decksAction';
-class AddDeckScreen extends React.Component {
+import { addQuestion } from '../../actions/decksAction';
+class AddQuestionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckName: '',
-      deckList: this.props.dekList || []
+      question: '',
+      answer: ''
     };
   }
 
@@ -23,41 +23,34 @@ class AddDeckScreen extends React.Component {
     },
   };
 
-   saveDeck = (deckName) => {
-    if(deckName.length > 0) {
-      let deck = {
-          deckId: this.makeid(),
-          deckName: deckName,
-          questions: []
-        };
-
-        this.setState({deckName: ''});
-        this.props.save(deck);
+  saveQuestion = (questionObj) => {
+    if(questionObj.question.length > 0 && questionObj.answer.length > 0) {
+        this.setState({answer: ''});
+        this.setState({question: ''});
+        this.props.save(questionObj);
         asyncSaveDeck(this.props.deckList);
     } else {
       alert('You must not submit an deck with empty title');
     }
   }
 
-  makeid = () => {
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for (var i = 0; i < 9; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
-  }
-
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        <Text style={styles.titleStyle}>Deck Name</Text>
+        <Text style={styles.titleStyle}>Add Question</Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 8}}
-          onChangeText={(deckName) => this.setState({deckName})}
-          value={this.state.deckName}
+          onChangeText={(question) => this.setState({question})}
+          value={this.state.question}
+        />
+        <Text style={styles.titleStyle}>Add Answer to question</Text>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 8}}
+          onChangeText={(answer) => this.setState({answer})}
+          value={this.state.answer}
         />
         <View style={styles.buttonStyle}>
-          <Button title="Create Deck" onPress={() => {this.saveDeck(this.state.deckName)}}/>
+          <Button title="Add Question" onPress={() => {this.saveQuestion({question: this.state.question, answer: this.state.answer, selectedDeckId: this.props.selectedDeck.deckId})}}/>
         </View>
       </ScrollView>
     );
@@ -82,16 +75,16 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    save: (deck) => {
-      dispatch(addDeck(deck));
+    save: (question) => {
+      dispatch(addQuestion(question));
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    deckList: state.decksReducer.deckList
+    selectedDeck: state.decksReducer.selectedDeck
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddDeckScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestionScreen);

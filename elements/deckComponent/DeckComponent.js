@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button  } from 'react-native';
 import { setSelectedDeck } from '../../actions/decksAction';
-import { createStackNavigator } from 'react-navigation';
-import DeckScreen from '../../views/deck/deck.js';
-
 
 class DeckComponent extends React.Component {
   constructor(props) {
@@ -18,17 +15,17 @@ class DeckComponent extends React.Component {
     }
   }
 
-  goToDeck = (deckId) => {
-    this.props.setDeck(this.props.deck.deckId);
+  goToDeck = () => {
+    this.props.setDeck(this.props.deck);
     this.props.navigate("Deck");
   };
 
   render() {
     return (
-      <View style={styles.deckCard} key={'cmp'+this.props.deck.id}>
+      <View style={styles.deckCard} key={'cmp'+this.props.deckId}>
         <Text>Deck name: {this.props.deck.deckName}</Text>
         <Text>Number of questions: {this.props.deck.questions.length}</Text>
-        <Button title="see" onPress={() => { this.goToDeck(this.props.deck.deckId) }}/>
+        <Button title="see" onPress={() => { this.goToDeck() }}/>
       </View>
     );
   }
@@ -46,8 +43,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setDeck: (deckId) => {
-      dispatch(setSelectedDeck(deckId));
+    setDeck: (deck) => {
+      dispatch(setSelectedDeck(deck));
     }
   }
 }
@@ -57,9 +54,5 @@ const mapStateToProps = (state) => {
     selectedDeck: state.decksReducer.selectedDeck
   }
 }
-
-// const Deck = createStackNavigator({
-//   Deck:  DeckScreen,
-// });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckComponent);
