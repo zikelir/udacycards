@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
 import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
-import { deleteDecks } from '../../actions/decksAction';
+import { deleteDecks, getDecks } from '../../actions/decksAction';
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class HomeScreen extends React.Component {
 
     asyncGetDecks().then((result) => {
       this.setState({deckList: result});
+      this.props.getAllDecks();
     });
    }
 
@@ -29,6 +30,7 @@ class HomeScreen extends React.Component {
      if(this.props.deckList !== nextProps.deckList) {
       asyncGetDecks().then((result) => {
           this.setState({deckList: result});
+          this.props.getAllDecks();
         });
        return true;
      }
@@ -73,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     delete: () => {
       dispatch(deleteDecks());
+    },
+    getAllDecks: () => {
+      dispatch(getDecks());
     }
   }
 }

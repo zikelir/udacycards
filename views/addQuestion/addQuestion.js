@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
-import { addQuestion } from '../../actions/decksAction';
+import { addQuestion, getDecks } from '../../actions/decksAction';
 class AddQuestionScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +29,7 @@ class AddQuestionScreen extends React.Component {
         this.setState({question: ''});
         this.props.save(questionObj);
         asyncSaveDeck(this.props.deckList);
+        this.props.getAllDecks();
     } else {
       alert('You must not submit an deck with empty title');
     }
@@ -77,6 +78,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     save: (question) => {
       dispatch(addQuestion(question));
+    },
+    getAllDecks: () => {
+      dispatch(getDecks());
     }
   }
 }

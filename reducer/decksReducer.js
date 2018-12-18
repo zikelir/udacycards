@@ -6,7 +6,6 @@ const initialState = {
 }
 
 function decksReducer(state = initialState, action) {
-  console.log('reducer>>>>>', action.payload);
   switch (action.type) {
     case ADD_DECK :
       return {

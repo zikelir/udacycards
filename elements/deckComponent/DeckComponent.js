@@ -10,7 +10,7 @@ class DeckComponent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.deck.deckName !== nextProps.deckName) {
+    if(this.props.deck.deckName !== nextProps.deck.deckName || this.props.deck.questions.length !== nextProps.deck.questions.length) {
       return true
     }
   }
