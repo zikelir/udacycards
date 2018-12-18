@@ -8,7 +8,7 @@ class AddDeckScreen extends React.Component {
     super(props);
     this.state = {
       deckName: '',
-      deckList: this.props.dekList || []
+      deckList: this.props.deckList || []
     };
   }
 

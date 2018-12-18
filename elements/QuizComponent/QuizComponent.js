@@ -6,15 +6,31 @@ import { setSelectedDeck } from '../../actions/decksAction';
 class QuizComponent extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {};
+      this.state = {
+        showAnswer: false,
+      };
+  }
+
+  showAnswer = () => {
+    this.state.showAnswer === false ? this.setState({showAnswer: true}) : this.setState({showAnswer: false});
+  }
+
+  answer = () => {
+    if(this.state.showAnswer === true) {
+      return <Text>{this.props.question.answer}</Text>
+    } else {
+      return <Text style={{color: 'transparent'}}>lorem</Text>
+    }
   }
 
   render() {
     return (
       <View style={styles.quizCard}>
-        <Text>Deck name: {this.props.deck.deckName}</Text>
-        <Text>Number of questions: {this.props.deck.questions.length}</Text>
-        <Button title="see" onPress={() => { this.goToDeck() }}/>
+        <Text>{this.props.question.question}</Text>
+        {this.answer()}
+        {
+          this.state.showAnswer === false ? <Button title="Show Answer" onPress={() => { this.showAnswer() }}/> : <Button title="Hide Answer" onPress={() => { this.showAnswer() }}/>
+        }
       </View>
     );
   }

@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
 import { addQuestion, getDecks } from '../../actions/decksAction';
+import QuizComponent from '../../elements/QuizComponent/QuizComponent';
 class QuizScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: '',
+      question: 0,
       answer: ''
     };
   }
@@ -26,7 +27,7 @@ class QuizScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        
+        <QuizComponent question={this.props.selectedDeck.questions[this.state.question]}/>
       </ScrollView>
     );
   }
