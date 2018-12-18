@@ -9,6 +9,7 @@ import HomeScreen from '../../views/home/home.js';
 import DeckScreen from '../../views/deck/deck.js';
 import AddDeckScreen from '../../views/addDeck/addDeck';
 import AddQuestionScreen from '../../views/addQuestion/addQuestion';
+import QuizScreen from '../../views/quiz/quiz';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -17,6 +18,7 @@ const HomeStack = createStackNavigator(
     Home:  HomeScreen,
     Deck:  DeckScreen,
     AddQuestion: AddQuestionScreen,
+    Quiz: QuizScreen
   }
 );
 

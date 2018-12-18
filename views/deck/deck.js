@@ -17,12 +17,16 @@ class DeckScreen extends React.Component {
     this.props.navigation.navigate("AddQuestion");
   };
 
+  goToQuiz = () => {
+    this.props.navigation.navigate("Quiz");
+  }
+
   render() {
     return (
       <View style={{borderWidth: 1, borderColor: 'gray', margin: 8}}>
         <Text style={{margin: 8}}>Deck Name: {this.props.selectedDeck.deckName}</Text>
         <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questions.length}</Text>
-        <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => {}} color='orange'/></View>
+        <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View>
         <View style={{margin: 8}}><Button title="Add Question" onPress={() => { this.goToAddQuestion() }}/></View>
       </View>
     );
