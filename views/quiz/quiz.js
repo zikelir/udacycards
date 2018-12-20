@@ -9,7 +9,9 @@ class QuizScreen extends React.Component {
     super(props);
     this.state = {
       question: 0,
-      answer: ''
+      answer: '',
+      answered: 10,
+      activeQuestion: 1
     };
   }
 
@@ -27,7 +29,11 @@ class QuizScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
+        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>8 points from 10</Text>}
         <QuizComponent question={this.props.selectedDeck.questions[this.state.question]}/>
+        <View style={{margin: 8}}><Button title="Next Question"/></View>
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Restart Quiz'/>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Back to Deck'/>}
       </ScrollView>
     );
   }

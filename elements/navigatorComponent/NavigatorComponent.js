@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
-  createAppContainer
+  createAppContainer,
 } from 'react-navigation';
 import HomeScreen from '../../views/home/home.js';
 import DeckScreen from '../../views/deck/deck.js';
@@ -18,7 +18,8 @@ const HomeStack = createStackNavigator(
     Home:  HomeScreen,
     Deck:  DeckScreen,
     AddQuestion: AddQuestionScreen,
-    Quiz: QuizScreen
+    Quiz: QuizScreen,
+    AddDeck: AddDeckScreen,
   }
 );
 

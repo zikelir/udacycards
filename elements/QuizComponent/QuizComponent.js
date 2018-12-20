@@ -26,11 +26,19 @@ class QuizComponent extends React.Component {
   render() {
     return (
       <View style={styles.quizCard}>
-        <Text>{this.props.question.question}</Text>
+        <Text>{this.props.question ? this.props.question.question : 'No question'}</Text>
         {this.answer()}
         {
           this.state.showAnswer === false ? <Button title="Show Answer" onPress={() => { this.showAnswer() }}/> : <Button title="Hide Answer" onPress={() => { this.showAnswer() }}/>
         }
+        <View style={{flexDirection: 'row', marginTop: 8}}>
+          <View style={{width: '49%', marginRight: 8}}>
+            <Button title="Correct" color='green'></Button>
+          </View>
+          <View style={{width: '49%'}}>
+            <Button title="Wrong" color='red'></Button>
+          </View>
+        </View>
       </View>
     );
   }
@@ -48,7 +56,6 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
   }
 }
 

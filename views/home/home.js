@@ -9,7 +9,7 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckList: []
+      deckList: [],
     };
   }
 
@@ -19,22 +19,21 @@ class HomeScreen extends React.Component {
         initialArr();
       }
     });
-
     asyncGetDecks().then((result) => {
       this.setState({deckList: result});
       this.props.getAllDecks();
     });
-   }
+  }
 
-   componentWillReceiveProps(nextProps) {
-     if(this.props.deckList !== nextProps.deckList) {
-      asyncGetDecks().then((result) => {
-          this.setState({deckList: result});
-          this.props.getAllDecks();
-        });
-       return true;
-     }
-   }
+  //  componentWillReceiveProps(nextProps) {
+  //    if(this.props.deckList !== nextProps.deckList) {
+  //     asyncGetDecks().then((result) => {
+  //         this.setState({deckList: result});
+  //         this.props.getAllDecks();
+  //       });
+  //      return true;
+  //    }
+  //  }
 
    deleteAll = () => {
      this.props.delete();

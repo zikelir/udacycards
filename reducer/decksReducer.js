@@ -1,11 +1,12 @@
 
-import { ADD_DECK, GET_DECKS, DELETE_DECKS, SET_SELECTED_DECK, ADD_QUESTION } from '../actions/decksAction';
+import { ADD_DECK, GET_DECKS, DELETE_DECKS, SET_SELECTED_DECK, SET_SELECTED_DECKID, ADD_QUESTION } from '../actions/decksAction';
 const initialState = {
   deckList: [],
   selectedDeck: ''
 }
 
 function decksReducer(state = initialState, action) {
+  // console.log('>>>>>>>>>>>>>>>',state.selectedDeck.deckName);
   switch (action.type) {
     case ADD_DECK :
       return {
@@ -21,6 +22,11 @@ function decksReducer(state = initialState, action) {
         ...state,
         selectedDeck: action.payload.selectedDeck
       }
+      case SET_SELECTED_DECKID :
+      return {
+        ...state,
+        selectedDeckId: action.payload.selectedDeckId
+      }
     case DELETE_DECKS :
       return {
         ...state,
@@ -32,7 +38,7 @@ function decksReducer(state = initialState, action) {
         ...state,
         deckList: state.deckList.map(item => {
           if(item.deckId === action.payload.question.selectedDeckId) {
-            item.questions.push({ question: action.payload.question.question, answer: action.payload.question.answer });
+            item.questions.push({ question: action.payload.question.question, answer: action.payload.question.answer, answered: '' });
             return item;
           } else {
             return item;

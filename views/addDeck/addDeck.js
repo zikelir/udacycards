@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
-import { addDeck } from '../../actions/decksAction';
+import { addDeck, setSelectedDeckId, getDecks } from '../../actions/decksAction';
 class AddDeckScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       deckName: '',
-      deckList: this.props.deckList || []
+      deckList: this.props.deckList || [],
     };
   }
 
@@ -25,8 +25,9 @@ class AddDeckScreen extends React.Component {
 
    saveDeck = (deckName) => {
     if(deckName.length > 0) {
+      const deckId = this.makeid();
       let deck = {
-          deckId: this.makeid(),
+          deckId: deckId,
           deckName: deckName,
           questions: []
         };
@@ -34,6 +35,9 @@ class AddDeckScreen extends React.Component {
         this.setState({deckName: ''});
         this.props.save(deck);
         asyncSaveDeck(this.props.deckList);
+        this.props.getSelectedDeck(deckId);
+        this.props.getAllDecks();
+        this.props.navigation.navigate('Deck');
     } else {
       alert('You must not submit an deck with empty title');
     }
@@ -84,6 +88,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     save: (deck) => {
       dispatch(addDeck(deck));
+    },
+    getSelectedDeck: (deckId) => {
+      dispatch(setSelectedDeckId(deckId))
+    },
+    getAllDecks: () => {
+      dispatch(getDecks());
     }
   }
 }

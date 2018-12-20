@@ -12,7 +12,7 @@ export const initialArr = async () => {
 export const asyncSaveDeck  = async (deck) => {
   try {
     await AsyncStorage.setItem('decks', JSON.stringify(deck));
-    alert('Deck Submited!!');
+    // alert('Deck Submited!!');
   } catch (error) {
     // Error saving data
     alert(error);
@@ -38,6 +38,6 @@ export const asyncGetAll = async () => {
 
 export const asyncDeleteDecks = async () => {
   const decks = await AsyncStorage.clear();
-  alert('deleted all decks');
+  // alert('deleted all decks');
   return decks;
 }

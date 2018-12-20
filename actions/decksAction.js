@@ -1,6 +1,7 @@
 export const ADD_DECK = 'ADD_DECK';
 export const GET_DECKS = 'GET_DECKS';
 export const SET_SELECTED_DECK = 'SET_SELECTED_DECK';
+export const SET_SELECTED_DECKID = 'SET_SELECTED_DECKID';
 export const DELETE_DECKS = 'DELETE_DECKS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 
@@ -24,6 +25,15 @@ export function setSelectedDeck(selectedDeck) {
     type: SET_SELECTED_DECK,
     payload: {
       selectedDeck
+    }
+  }
+}
+
+export function setSelectedDeckId(selectedDeckId) {
+  return {
+    type: SET_SELECTED_DECKID,
+    payload: {
+      selectedDeckId
     }
   }
 }
