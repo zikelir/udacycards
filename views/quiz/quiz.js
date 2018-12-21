@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
-import { addQuestion, getDecks } from '../../actions/decksAction';
+import { addQuestion, getDecks, setSelectedDeckId } from '../../actions/decksAction';
 import QuizComponent from '../../elements/QuizComponent/QuizComponent';
 class QuizScreen extends React.Component {
   constructor(props) {
@@ -10,8 +10,9 @@ class QuizScreen extends React.Component {
     this.state = {
       question: 0,
       answer: '',
-      answered: 10,
-      activeQuestion: 1
+      answered: 0,
+      activeQuestion: 0,
+      correct: 0
     };
   }
 
@@ -26,14 +27,28 @@ class QuizScreen extends React.Component {
     },
   };
 
+  restartQuiz = () => {
+    this.setState({activeQuestion: 0});
+  }
+
+  backToDeck = () => {
+    this.props.getSelectedDeck(this.props.selectedDeck.deckId);
+    this.props.navigation.navigate('Deck');
+  }
+
+  increment = () => {
+    this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1, correct: this.state.correct + 1});
+    console.log(this.state, 'stttt');
+  }
+
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>8 points from 10</Text>}
-        <QuizComponent question={this.props.selectedDeck.questions[this.state.question]}/>
-        <View style={{margin: 8}}><Button title="Next Question"/></View>
-        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Restart Quiz'/>}
-        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Back to Deck'/>}
+        <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>
+        <QuizComponent question={this.props.selectedDeck.questions[this.state.question]} increment={this.increment}/>
+        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Restart Quiz' onPress={() => { this.restartQuiz() }}/>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Back to Deck' onPress={() => { this.backToDeck() }}/>}
       </ScrollView>
     );
   }
@@ -47,7 +62,9 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+    getSelectedDeck: (deckId) => {
+      dispatch(setSelectedDeckId(deckId))
+    },
   }
 }
 

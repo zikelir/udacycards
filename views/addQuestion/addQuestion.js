@@ -30,7 +30,7 @@ class AddQuestionScreen extends React.Component {
         this.props.save(questionObj);
         asyncSaveDeck(this.props.deckList);
         this.props.getAllDecks();
-        this.props.navigation.navigate('Deck');
+        // this.props.navigation.navigate('Deck');
     } else {
       alert('You must not submit an deck with empty title');
     }

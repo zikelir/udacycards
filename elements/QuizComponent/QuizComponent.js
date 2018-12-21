@@ -33,7 +33,7 @@ class QuizComponent extends React.Component {
         }
         <View style={{flexDirection: 'row', marginTop: 8}}>
           <View style={{width: '49%', marginRight: 8}}>
-            <Button title="Correct" color='green'></Button>
+            <Button title="Correct" color='green' onPress={() => this.props.increment()}></Button>
           </View>
           <View style={{width: '49%'}}>
             <Button title="Wrong" color='red'></Button>

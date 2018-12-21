@@ -38,7 +38,7 @@ function decksReducer(state = initialState, action) {
         ...state,
         deckList: state.deckList.map(item => {
           if(item.deckId === action.payload.question.selectedDeckId) {
-            item.questions.push({ question: action.payload.question.question, answer: action.payload.question.answer, answered: '' });
+            item.questions.push({ question: action.payload.question.question, answer: action.payload.question.answer });
             return item;
           } else {
             return item;
