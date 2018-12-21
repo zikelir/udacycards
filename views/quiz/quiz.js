@@ -39,20 +39,17 @@ class QuizScreen extends React.Component {
 
   increment = () => {
     this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1, correct: this.state.correct + 1});
-    if(this.state.answered === this.state.activeQuestion + 1) {
-      this.setState({finished: true});
-    }
+    console.log(this.state.answered, this.props.selectedDeck.questions.length);
   }
 
   render() {
-    console.log(this.props.selectedDeck.questions, 'stttt');
     return (
       <ScrollView style={styles.contentContainer}>
-        <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>
-        {this.state.finished === false && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} activeQuestion={this.state.activeQuestion}/>}
+        {this.state.activeQuestion + 1 <= this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>}
+        {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} activeQuestion={this.state.activeQuestion}/>}
         {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
-        {this.state.finished === true && <Button style={{margin: 8}} title='Restart Quiz' onPress={() => { this.restartQuiz() }}/>}
-        {this.state.finished === true && <Button style={{margin: 8}} title='Back to Deck' onPress={() => { this.backToDeck() }}/>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Restart Quiz' onPress={() => { this.restartQuiz() }}/>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Back to Deck' onPress={() => { this.backToDeck() }}/>}
       </ScrollView>
     );
   }
