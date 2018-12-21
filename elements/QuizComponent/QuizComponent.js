@@ -23,6 +23,12 @@ class QuizComponent extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(this.props.activeQuestion !== nextProps.activeQuestion) {
+      return true;
+    }
+  }
+
   render() {
     return (
       <View style={styles.quizCard}>
