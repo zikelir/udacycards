@@ -25,6 +25,7 @@ class QuizComponent extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(this.props.activeQuestion !== nextProps.activeQuestion) {
+      this.setState({showAnswer: false});
       return true;
     }
   }
@@ -42,7 +43,7 @@ class QuizComponent extends React.Component {
             <Button title="Correct" color='green' onPress={() => this.props.increment()}></Button>
           </View>
           <View style={{width: '49%'}}>
-            <Button title="Wrong" color='red'></Button>
+            <Button title="Wrong" color='red' onPress={() => this.props.wrong()}></Button>
           </View>
         </View>
       </View>

@@ -29,7 +29,7 @@ class QuizScreen extends React.Component {
   };
 
   restartQuiz = () => {
-    this.setState({activeQuestion: 0});
+    this.setState({activeQuestion: 0, answered: 0, activeQuestion: 0, correct: 0});
   }
 
   backToDeck = () => {
@@ -39,14 +39,17 @@ class QuizScreen extends React.Component {
 
   increment = () => {
     this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1, correct: this.state.correct + 1});
-    console.log(this.state.answered, this.props.selectedDeck.questions.length);
+  }
+
+  wrong = () => {
+    this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1,})
   }
 
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
         {this.state.activeQuestion + 1 <= this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>}
-        {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} activeQuestion={this.state.activeQuestion}/>}
+        {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} wrong={this.wrong} activeQuestion={this.state.activeQuestion}/>}
         {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
         {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Restart Quiz' onPress={() => { this.restartQuiz() }}/>}
         {this.state.answered === this.props.selectedDeck.questions.length && <Button style={{margin: 8}} title='Back to Deck' onPress={() => { this.backToDeck() }}/>}
