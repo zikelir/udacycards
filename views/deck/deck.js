@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import { setSelectedDeck } from '../../actions/decksAction';
 import { asyncGetDecks } from '../../utils/api';
+import { clearLocalNotification, setLocalNotification } from '../../utils/push';
 import {
   NavigationEvents
 } from 'react-navigation';
@@ -29,6 +30,8 @@ class DeckScreen extends React.Component {
   };
 
   goToQuiz = () => {
+    clearLocalNotification()
+      .then(setLocalNotification);
     this.props.navigation.navigate("Quiz");
   }
 
