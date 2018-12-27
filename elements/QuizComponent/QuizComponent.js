@@ -17,7 +17,7 @@ class QuizComponent extends React.Component {
 
   answer = () => {
     if(this.state.showAnswer === true) {
-      return <Text>{this.props.question.answer}</Text>
+      return <Text style={{fontStyle: 'italic', textAlign: 'center'}}>{this.props.question.answer}</Text>
     } else {
       return <Text style={{color: 'transparent'}}>lorem</Text>
     }
@@ -33,10 +33,12 @@ class QuizComponent extends React.Component {
   render() {
     return (
       <View style={styles.quizCard}>
-        <Text>{this.props.question ? this.props.question.question : 'No question'}</Text>
+        <Text style={{fontWeight: 'bold', textAlign: 'center'}}>{this.props.question ? this.props.question.question : 'No question'}</Text>
         {this.answer()}
         {
-          this.state.showAnswer === false ? <Button title="Show Answer" onPress={() => { this.showAnswer() }}/> : <Button title="Hide Answer" onPress={() => { this.showAnswer() }}/>
+          this.state.showAnswer === false
+          ?  <View style={{marginTop: 8}}><Button title="Show Answer" onPress={() => { this.showAnswer() }}/></View>
+          : <View style={{marginTop: 8}}><Button title="Hide Answer" onPress={() => { this.showAnswer() }}/></View>
         }
         <View style={{flexDirection: 'row', marginTop: 8}}>
           <View style={{width: '49%', marginRight: 8}}>
