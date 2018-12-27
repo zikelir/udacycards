@@ -19,10 +19,13 @@ export function createNotification() {
   return {
     title: "Daily Reminder",
     body: "⚡ Hey let's do some quiz today!!! ⚡",
-    androidn: {
+    ios: {
+      sound: true,
+    },
+    android: {
       sound: true,
       priority: 'high',
-      sitcky: false,
+      sticky: false,
       vibrate: true,
     }
   }
@@ -52,7 +55,11 @@ export function setLocalNotification() {
 
               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
             }
-          })
+          }).catch((error) => {
+            console.log(error);
+          });
       }
+    }).catch((error) => {
+      console.log(error);
     });
 }
