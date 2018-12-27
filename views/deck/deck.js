@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
+import { Button, Text, ScrollView, View, StyleSheet, Animated } from 'react-native';
 import { setSelectedDeck } from '../../actions/decksAction';
 import { asyncGetDecks } from '../../utils/api';
 import { clearLocalNotification, setLocalNotification } from '../../utils/push';
@@ -11,7 +11,8 @@ class DeckScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedDeck: ''
+      selectedDeck: '',
+      opacity: new Animated.Value(0)
     };
   }
   static navigationOptions = {
@@ -36,12 +37,17 @@ class DeckScreen extends React.Component {
   }
 
   componentDidMount() {
+    const { opacity } = this.state;
     if(this.props.selectedDeckId) {
       this.props.deckList.forEach(item => {
         if(item.deckId === this.props.selectedDeckId) {
           this.props.getSelectedDeck(item);
         }
       })
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 1000
+      }).start();
     }
   }
 
@@ -54,8 +60,9 @@ class DeckScreen extends React.Component {
 
 
   render() {
+    const { opacity } = this.state;
     return (
-      <View style={{borderWidth: 1, borderColor: 'gray', margin: 8}}>
+      <Animated.View style={{borderWidth: 1, borderColor: 'gray', margin: 8, opacity}}>
         <NavigationEvents
             onWillFocus={() => {
               if(this.props.selectedDeckId) {
@@ -72,7 +79,7 @@ class DeckScreen extends React.Component {
         {(this.props.selecteDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
         <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View>
         <View style={{margin: 8}}><Button title="Add Question" onPress={() => { this.goToAddQuestion() }}/></View>
-      </View>
+      </Animated.View>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Button  } from 'react-native';
+import { StyleSheet, Text, View, Button, Animated  } from 'react-native';
 import { setSelectedDeck } from '../../actions/decksAction';
 
 class DeckComponent extends React.Component {
