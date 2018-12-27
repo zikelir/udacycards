@@ -50,13 +50,11 @@ class QuizScreen extends React.Component {
       <ScrollView style={styles.contentContainer}>
         {this.state.activeQuestion + 1 <= this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>}
         {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} wrong={this.wrong} activeQuestion={this.state.activeQuestion}/>}
-        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
+        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
         {this.state.answered === this.props.selectedDeck.questions.length && <View style={{ margin: 8, flexDirection: 'row' }}>
           <View style={{width: '49%'}}><Button title='Restart Quiz' onPress={() => { this.restartQuiz() }}/></View>
           <View style={{width: '49%', marginLeft: 8}}><Button title='Back to Deck' onPress={() => { this.backToDeck() }}/></View>
         </View>}
-        {/* {this.state.answered === this.props.selectedDeck.questions.length && <Button title='Restart Quiz' onPress={() => { this.restartQuiz() }}/>}
-        {this.state.answered === this.props.selectedDeck.questions.length && <Button title='Back to Deck' onPress={() => { this.backToDeck() }}/>} */}
       </ScrollView>
     );
   }
