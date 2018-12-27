@@ -12,7 +12,8 @@ class DeckScreen extends React.Component {
     super(props);
     this.state = {
       selectedDeck: '',
-      opacity: new Animated.Value(0)
+      opacity: new Animated.Value(0),
+      width: new Animated.Value(0),
     };
   }
   static navigationOptions = {
@@ -37,7 +38,7 @@ class DeckScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { opacity } = this.state;
+    const { opacity, width, height } = this.state;
     if(this.props.selectedDeckId) {
       this.props.deckList.forEach(item => {
         if(item.deckId === this.props.selectedDeckId) {
@@ -48,6 +49,12 @@ class DeckScreen extends React.Component {
         toValue: 1,
         duration: 1000
       }).start();
+
+      Animated.spring(width, {
+        toValue: '100%',
+        speed: 5
+      }).start();
+
     }
   }
 
@@ -60,9 +67,9 @@ class DeckScreen extends React.Component {
 
 
   render() {
-    const { opacity } = this.state;
+    const { opacity, width } = this.state;
     return (
-      <Animated.View style={{borderWidth: 1, borderColor: 'gray', margin: 8, opacity}}>
+      <Animated.View style={{borderWidth: 1, borderColor: 'gray', margin: 8, opacity, width }}>
         <NavigationEvents
             onWillFocus={() => {
               if(this.props.selectedDeckId) {
