@@ -38,11 +38,11 @@ class DeckScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { opacity, width, height } = this.state;
+    const { opacity, width } = this.state;
     if(this.props.selectedDeckId) {
       this.props.deckList.forEach(item => {
         if(item.deckId === this.props.selectedDeckId) {
-          this.props.getSelectedDeck(item);
+          this.props.getSelectedDeck(this.props.selectedDeck);
         }
       })
       Animated.timing(opacity, {
@@ -55,12 +55,6 @@ class DeckScreen extends React.Component {
         speed: 5
       }).start();
 
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if(this.props.questionLength !== nextProps.questionLength) {
-      return true;
     }
   }
 
@@ -80,8 +74,8 @@ class DeckScreen extends React.Component {
             }}
           />
         {this.props.selectedDeck ? <Text style={{margin: 8}}>Deck Name: {this.props.selectedDeck.deckName}</Text> : <Text style={{margin: 8}}>No name</Text>}
-        {(this.props.selecteDeck &&  this.props.selectedDeck.questions > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questionLength}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
-        {(this.props.selecteDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
+        {(this.props.selectedDeck &&  this.props.selectedDeck.questions.length > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questions.length}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
+        {(this.props.selectedDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
         {/* <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> */}
         <View style={{margin: 8}}><Button title="Add Question" onPress={() => { this.goToAddQuestion() }}/></View>
       </Animated.View>

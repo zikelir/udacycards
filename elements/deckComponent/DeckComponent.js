@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button, Animated  } from 'react-native';
-import { setSelectedDeck } from '../../actions/decksAction';
+import { setSelectedDeckId } from '../../actions/decksAction';
 
 class DeckComponent extends React.Component {
   constructor(props) {
@@ -10,15 +10,15 @@ class DeckComponent extends React.Component {
   }
 
   goToDeck = () => {
-    this.props.setDeck(this.props.deck);
+    this.props.getSelectedDeck(this.props.deck.deckId);
     this.props.navigate("Deck");
   };
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props.questionLength !== nextProps.questionLength) {
-      return true;
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if(this.props.questionLength !== nextProps.questionLength) {
+  //     return true;
+  //   }
+  // }
 
   render() {
     return (
@@ -43,16 +43,16 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setDeck: (deck) => {
-      dispatch(setSelectedDeck(deck));
-    }
+    getSelectedDeck: (deckId) => {
+      dispatch(setSelectedDeckId(deckId))
+    },
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     selectedDeck: state.decksReducer.selectedDeck,
-    questionLength: state.decksReducer.questionLength
+    questionLength: state.decksReducer.questionLength,
   }
 }
 

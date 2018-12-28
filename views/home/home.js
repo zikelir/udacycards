@@ -44,7 +44,6 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <ScrollView styles={styles.contentContainer}>
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
