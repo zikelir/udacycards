@@ -29,7 +29,7 @@ class AddDeckScreen extends React.Component {
       let deck = {
           deckId: deckId,
           deckName: deckName,
-          questions: []
+          questions: [],
         };
 
         this.setState({deckName: ''});

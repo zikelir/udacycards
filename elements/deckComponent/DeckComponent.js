@@ -9,16 +9,16 @@ class DeckComponent extends React.Component {
       this.state = {};
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props.deck.deckName !== nextProps.deck.deckName || this.props.deck.questions.length !== nextProps.deck.questions.length) {
-      return true
-    }
-  }
-
   goToDeck = () => {
     this.props.setDeck(this.props.deck);
     this.props.navigate("Deck");
   };
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.questionLength !== nextProps.questionLength) {
+      return true;
+    }
+  }
 
   render() {
     return (
@@ -51,7 +51,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    selectedDeck: state.decksReducer.selectedDeck
+    selectedDeck: state.decksReducer.selectedDeck,
+    questionLength: state.decksReducer.questionLength
   }
 }
 

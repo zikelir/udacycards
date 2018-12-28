@@ -19,21 +19,13 @@ class HomeScreen extends React.Component {
         initialArr();
       }
     });
-    asyncGetDecks().then((result) => {
-      this.setState({deckList: result});
-      this.props.getAllDecks();
-    });
   }
 
-  //  componentWillReceiveProps(nextProps) {
-  //    if(this.props.deckList !== nextProps.deckList) {
-  //     asyncGetDecks().then((result) => {
-  //         this.setState({deckList: result});
-  //         this.props.getAllDecks();
-  //       });
-  //      return true;
-  //    }
-  //  }
+  componentWillReceiveProps(nextProps) {
+    if(this.props.questionLength !== nextProps.questionLength) {
+      return true;
+    }
+  }
 
    deleteAll = () => {
      this.props.delete();
@@ -52,6 +44,7 @@ class HomeScreen extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <ScrollView styles={styles.contentContainer}>
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
@@ -82,7 +75,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    deckList: state.decksReducer.deckList
+    deckList: state.decksReducer.deckList,
+    selectedDeckId: state.decksReducer.selectedDeckId,
+    selectedDeck: state.decksReducer.selectedDeck,
+    questionLength: state.decksReducer.questionLength
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

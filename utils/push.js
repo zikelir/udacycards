@@ -12,7 +12,7 @@ export function getDailyReminderValue() {
 
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync);
+    .then(Notifications.cancelAllScheduledNotificationAsync);
 }
 
 export function createNotification() {
@@ -45,7 +45,7 @@ export function setLocalNotification() {
               tomorrow.setDate(tomorrow.getDate() + 1);
               tomorrow.setHours(21);
               tomorrow.setMinutes(0);
-              Notifications.scheduleLocalNotificationsAsync(
+              Notifications.scheduleLocalNotificationAsync(
                 createNotification(),
                 {
                   time: tomorrow,

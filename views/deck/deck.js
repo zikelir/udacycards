@@ -58,13 +58,11 @@ class DeckScreen extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if(this.props.selecteDeck !== nextProps.selecteDeck) {
-  //     console.log('willlll');
-  //     return true;
-  //   }
-  // }
-
+  componentWillReceiveProps(nextProps) {
+    if(this.props.questionLength !== nextProps.questionLength) {
+      return true;
+    }
+  }
 
   render() {
     const { opacity, width } = this.state;
@@ -82,9 +80,9 @@ class DeckScreen extends React.Component {
             }}
           />
         {this.props.selectedDeck ? <Text style={{margin: 8}}>Deck Name: {this.props.selectedDeck.deckName}</Text> : <Text style={{margin: 8}}>No name</Text>}
-        {(this.props.selecteDeck &&  this.props.selectedDeck.questions > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questions.length}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
+        {(this.props.selecteDeck &&  this.props.selectedDeck.questions > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questionLength}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
         {(this.props.selecteDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
-        <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View>
+        {/* <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> */}
         <View style={{margin: 8}}><Button title="Add Question" onPress={() => { this.goToAddQuestion() }}/></View>
       </Animated.View>
     );
@@ -109,7 +107,8 @@ const mapStateToProps = (state) => {
   return {
     selectedDeckId: state.decksReducer.selectedDeckId,
     selectedDeck: state.decksReducer.selectedDeck,
-    deckList: state.decksReducer.deckList
+    deckList: state.decksReducer.deckList,
+    questionLength: state.decksReducer.questionLength
   }
 }
 
