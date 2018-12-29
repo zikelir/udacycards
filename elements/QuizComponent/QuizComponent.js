@@ -37,15 +37,15 @@ class QuizComponent extends React.Component {
         {this.answer()}
         {
           this.state.showAnswer === false
-          ?  <View style={{marginTop: 8}}><Button title="Show Answer" onPress={() => { this.showAnswer() }}/></View>
-          : <View style={{marginTop: 8}}><Button title="Hide Answer" onPress={() => { this.showAnswer() }}/></View>
+          ?  <View style={{marginTop: 8}}><Button color="#005466" title="Show Answer" onPress={() => { this.showAnswer() }}/></View>
+          : <View style={{marginTop: 8}}><Button color="#005466" title="Hide Answer" onPress={() => { this.showAnswer() }}/></View>
         }
         <View style={{flexDirection: 'row', marginTop: 8}}>
           <View style={{width: '49%', marginRight: 8}}>
-            <Button title="Correct" color='green' onPress={() => this.props.increment()}></Button>
+            <Button title="Correct" color='#1AB04D' onPress={() => this.props.increment()}></Button>
           </View>
           <View style={{width: '49%'}}>
-            <Button title="Wrong" color='red' onPress={() => this.props.wrong()}></Button>
+            <Button title="Wrong" color='#B0231A' onPress={() => this.props.wrong()}></Button>
           </View>
         </View>
       </View>

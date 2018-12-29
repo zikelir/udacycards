@@ -25,7 +25,7 @@ class DeckComponent extends React.Component {
       <View style={styles.deckCard} key={'cmp'+this.props.deckId}>
         <Text>Deck name: {this.props.deck.deckName}</Text>
         <Text>Number of questions: {this.props.deck.questions.length}</Text>
-        <Button title="see" onPress={() => { this.goToDeck() }}/>
+        <Button title="see" color="#005466" onPress={() => { this.goToDeck() }}/>
       </View>
     );
   }

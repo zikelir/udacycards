@@ -13,9 +13,9 @@ class AddQuestionScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Add New Deck',
+    title: 'Add New Question',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#005466',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -53,7 +53,7 @@ class AddQuestionScreen extends React.Component {
           value={this.state.answer}
         />
         <View style={styles.buttonStyle}>
-          <Button title="Add Question" onPress={() => {this.saveQuestion({question: this.state.question, answer: this.state.answer, selectedDeckId: this.props.selectedDeck.deckId})}}/>
+          <Button title="Add Question" color="#005466" onPress={() => {this.saveQuestion({question: this.state.question, answer: this.state.answer, selectedDeckId: this.props.selectedDeck.deckId})}}/>
         </View>
       </ScrollView>
     );

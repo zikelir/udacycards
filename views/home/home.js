@@ -35,7 +35,7 @@ class HomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Decks',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#005466',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -49,7 +49,7 @@ class HomeScreen extends React.Component {
         { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
           return (<DeckComponent deck={item} key={'dckcmp'+ item.deckId} navigate={this.props.navigation.navigate}/>);
         }) : <Text style={{margin: 8, fontWeight: 'bold'}}>Sorry but no cards</Text> }
-        <View style={{margin: 8}}><Button title="Delete all" onPress={() => this.deleteAll()} color='red'/></View>
+        { this.props.deckList.length > 0 && <View style={{margin: 8}}><Button title="Delete all"  color="#B0231A" onPress={() => this.deleteAll()}/></View>}
       </ScrollView>
     );
   }

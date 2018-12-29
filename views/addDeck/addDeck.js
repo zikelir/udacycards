@@ -15,7 +15,7 @@ class AddDeckScreen extends React.Component {
   static navigationOptions = {
     title: 'Add New Deck',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#005466',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -61,7 +61,7 @@ class AddDeckScreen extends React.Component {
           value={this.state.deckName}
         />
         <View style={styles.buttonStyle}>
-          <Button title="Create Deck" onPress={() => {this.saveDeck(this.state.deckName)}}/>
+          <Button title="Create Deck" color="#005466" onPress={() => {this.saveDeck(this.state.deckName)}}/>
         </View>
       </ScrollView>
     );

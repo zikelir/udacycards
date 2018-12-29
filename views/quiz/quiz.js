@@ -20,7 +20,7 @@ class QuizScreen extends React.Component {
   static navigationOptions = {
     title: 'Quiz',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#005466',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -52,8 +52,8 @@ class QuizScreen extends React.Component {
         {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} wrong={this.wrong} activeQuestion={this.state.activeQuestion}/>}
         {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
         {this.state.answered === this.props.selectedDeck.questions.length && <View style={{ margin: 8, flexDirection: 'row' }}>
-          <View style={{width: '49%'}}><Button title='Restart Quiz' onPress={() => { this.restartQuiz() }}/></View>
-          <View style={{width: '49%', marginLeft: 8}}><Button title='Back to Deck' onPress={() => { this.backToDeck() }}/></View>
+          <View style={{width: '49%'}}><Button color="#005466" title='Restart Quiz' onPress={() => { this.restartQuiz() }}/></View>
+          <View style={{width: '49%', marginLeft: 8}}><Button color="#0D8797" title='Back to Deck' onPress={() => { this.backToDeck() }}/></View>
         </View>}
       </ScrollView>
     );

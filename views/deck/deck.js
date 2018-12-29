@@ -19,7 +19,7 @@ class DeckScreen extends React.Component {
   static navigationOptions = {
     title: 'Deck',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#005466',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -75,9 +75,9 @@ class DeckScreen extends React.Component {
           />
         {this.props.selectedDeck ? <Text style={{margin: 8}}>Deck Name: {this.props.selectedDeck.deckName}</Text> : <Text style={{margin: 8}}>No name</Text>}
         {(this.props.selectedDeck &&  this.props.selectedDeck.questions.length > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questions.length}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
-        {(this.props.selectedDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
+        {(this.props.selectedDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='#0D8797'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
         {/* <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> */}
-        <View style={{margin: 8}}><Button title="Add Question" onPress={() => { this.goToAddQuestion() }}/></View>
+        <View style={{margin: 8}}><Button title="Add Question" color="#005466" onPress={() => { this.goToAddQuestion() }}/></View>
       </Animated.View>
     );
   }
