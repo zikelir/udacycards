@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { LinearGradient } from 'expo';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
 import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
 import { deleteDecks, getDecks } from '../../actions/decksAction';
@@ -53,7 +54,7 @@ class HomeScreen extends React.Component {
             <ScrollView horizontal={true} style={{ flexWrap: 'nowrap', flexDirection: 'row', height: 400 }}>
             { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
             return (<DeckComponent deck={item} key={'dckcmp'+ item.deckId} navigate={this.props.navigation.navigate}/>);
-            }) : <Text style={{margin: 8, fontWeight: 'bold', color: 'white', fontSize: 36}}>Sorry but no cards</Text> }
+            }) : <View  style={{justifyContent: 'center', alignItems: 'center' }}><MaterialCommunityIcons name="cards-playing-outline" size={60} color='white' /><Text style={{margin: 8, fontWeight: 'bold', color: 'white', fontSize: 36}}>Sorry but no cards</Text></View> }
           </ScrollView>
           { this.props.deckList.length > 0 && <View style={{marginBottom: 64}}><Button title="Delete all"  color="#B0231A" onPress={() => this.deleteAll()}/></View>}
         </LinearGradient>
