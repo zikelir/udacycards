@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { LinearGradient } from 'expo';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
 import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
@@ -45,12 +46,18 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView styles={styles.contentContainer}>
-        { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
-          return (<DeckComponent deck={item} key={'dckcmp'+ item.deckId} navigate={this.props.navigation.navigate}/>);
-        }) : <Text style={{margin: 8, fontWeight: 'bold'}}>Sorry but no cards</Text> }
-        { this.props.deckList.length > 0 && <View style={{margin: 8}}><Button title="Delete all"  color="#B0231A" onPress={() => this.deleteAll()}/></View>}
-      </ScrollView>
+      <View styles={styles.contentContainer}>
+        <LinearGradient
+          colors={['#005466', '#0E0066']}
+          style={{ padding: 15, alignItems: 'center', justifyContent: 'center', width: '100%', height: 650 }}>
+            <ScrollView horizontal={true} style={{ flexWrap: 'nowrap', flexDirection: 'row', height: 400 }}>
+            { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
+            return (<DeckComponent deck={item} key={'dckcmp'+ item.deckId} navigate={this.props.navigation.navigate}/>);
+            }) : <Text style={{margin: 8, fontWeight: 'bold', color: 'white', fontSize: 36}}>Sorry but no cards</Text> }
+          </ScrollView>
+          { this.props.deckList.length > 0 && <View style={{marginBottom: 64}}><Button title="Delete all"  color="#B0231A" onPress={() => this.deleteAll()}/></View>}
+        </LinearGradient>
+      </View>
     );
   }
 }

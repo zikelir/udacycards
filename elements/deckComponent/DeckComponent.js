@@ -23,8 +23,10 @@ class DeckComponent extends React.Component {
   render() {
     return (
       <View style={styles.deckCard} key={'cmp'+this.props.deckId}>
-        <Text>Deck name: {this.props.deck.deckName}</Text>
-        <Text>Number of questions: {this.props.deck.questions.length}</Text>
+        <View>
+          <Text><Text style={{fontWeight: 'bold'}}>Deck name:</Text> {this.props.deck.deckName}</Text>
+          <Text style={{marginTop: 8}}><Text style={{fontWeight: 'bold'}}>Number of questions:</Text> {this.props.deck.questions.length}</Text>
+        </View>
         <Button title="see" color="#005466" onPress={() => { this.goToDeck() }}/>
       </View>
     );
@@ -33,9 +35,15 @@ class DeckComponent extends React.Component {
 
 const styles = StyleSheet.create({
   deckCard: {
+    width: 300,
+    height: 300,
+    padding: 16,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'gray',
+    // borderWidth: 1,
+    // borderColor: 'gray',
+    borderRadius: 2,
+    justifyContent: 'space-between',
+    fontSize: 36,
     margin: 8,
     padding: 8,
   }
