@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, View, ToastAndroid } from 'react-native';
+import { LinearGradient } from 'expo';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { setSelectedDeckId } from '../../actions/decksAction';
 import QuizComponent from '../../elements/QuizComponent/QuizComponent';
 class QuizScreen extends React.Component {
@@ -57,13 +59,17 @@ class QuizScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        {this.state.activeQuestion + 1 <= this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>}
-        {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} wrong={this.wrong} activeQuestion={this.state.activeQuestion}/>}
-        {this.state.answered === this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold'}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text>}
-        {this.state.answered === this.props.selectedDeck.questions.length && <View style={{ margin: 8, flexDirection: 'row' }}>
-          <View style={{width: '49%'}}><Button color="#005466" title='Restart Quiz' onPress={() => { this.restartQuiz() }}/></View>
-          <View style={{width: '49%', marginLeft: 8}}><Button color="#0D8797" title='Back to Deck' onPress={() => { this.backToDeck() }}/></View>
-        </View>}
+        <LinearGradient
+          colors={['#005466', '#0E0066']}
+          style={{width: '100%', height: 650 }}>
+            {this.state.activeQuestion + 1 <= this.props.selectedDeck.questions.length && <Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold', fontSize: 36, color: 'white'}}>{this.state.activeQuestion + 1} of {this.props.selectedDeck.questions.length}</Text>}
+            {this.state.answered !== this.props.selectedDeck.questions.length && <QuizComponent question={this.props.selectedDeck.questions[this.state.activeQuestion]} increment={this.increment} wrong={this.wrong} activeQuestion={this.state.activeQuestion}/>}
+            {this.state.answered === this.props.selectedDeck.questions.length && <View style={{alignItems: 'center', marginTop: 32}}><MaterialCommunityIcons name="checkbox-marked-circle-outline" size={60} color='white' /><Text style={{margin: 8, textAlign: 'center', fontWeight: 'bold', color: 'white', fontSize: 36, alignItems: 'center'}}>{this.state.correct} correct answer from {this.props.selectedDeck.questions.length} questions</Text></View>}
+            {this.state.answered === this.props.selectedDeck.questions.length && <View style={{ margin: 8, flexDirection: 'row' }}>
+              <View style={{width: '49%'}}><Button color="#005466" title='Restart Quiz' onPress={() => { this.restartQuiz() }}/></View>
+              <View style={{width: '49%', marginLeft: 8}}><Button color="#0D8797" title='Back to Deck' onPress={() => { this.backToDeck() }}/></View>
+          </View>}
+        </LinearGradient>
       </ScrollView>
     );
   }

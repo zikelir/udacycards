@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, ScrollView, View, StyleSheet, Animated } from 'react-native';
+import { Button, Text, View, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo';
 import { setSelectedDeck } from '../../actions/decksAction';
 import { clearLocalNotification, setLocalNotification } from '../../utils/push';

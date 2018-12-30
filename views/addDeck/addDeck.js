@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View,ToastAndroid } from 'react-native';
-import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
+import { LinearGradient } from 'expo';
+import { asyncSaveDeck } from '../../utils/api';
 import { addDeck, setSelectedDeckId, getDecks } from '../../actions/decksAction';
 class AddDeckScreen extends React.Component {
   constructor(props) {
@@ -64,27 +65,29 @@ class AddDeckScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        <Text style={styles.titleStyle}>Deck Name</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 8}}
-          onChangeText={(deckName) => this.setState({deckName})}
-          value={this.state.deckName}
-        />
-        <View style={styles.buttonStyle}>
-          <Button title="Create Deck" color="#005466" onPress={() => {this.saveDeck(this.state.deckName)}}/>
-        </View>
+        <LinearGradient
+            colors={['#005466', '#0E0066']}
+            style={{width: '100%', height: 650 }}>
+          <Text style={styles.titleStyle}>Deck Name</Text>
+          <TextInput
+            style={{height: 40, backgroundColor: 'white', margin: 8}}
+            onChangeText={(deckName) => this.setState({deckName})}
+            value={this.state.deckName}
+          />
+          <View style={styles.buttonStyle}>
+            <Button title="Create Deck" color="#005466" onPress={() => {this.saveDeck(this.state.deckName)}}/>
+          </View>
+        </LinearGradient>
       </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    backgroundColor: 'white'
-  },
   titleStyle: {
     fontWeight: 'bold',
     textAlign: 'left',
+    color: 'white',
     fontSize: 16,
     paddingTop: 8,
     paddingLeft: 8
