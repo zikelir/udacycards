@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, View, StyleSheet, Animated } from 'react-native';
+import { LinearGradient } from 'expo';
 import { setSelectedDeck } from '../../actions/decksAction';
-import { asyncGetDecks } from '../../utils/api';
 import { clearLocalNotification, setLocalNotification } from '../../utils/push';
 import {
   NavigationEvents
@@ -61,23 +61,26 @@ class DeckScreen extends React.Component {
   render() {
     const { opacity, width } = this.state;
     return (
-      <Animated.View style={{borderWidth: 1, borderColor: 'gray', margin: 8, opacity, width }}>
-        <NavigationEvents
-            onWillFocus={() => {
-              if(this.props.selectedDeckId) {
-                this.props.deckList.forEach(item => {
-                  if(item.deckId === this.props.selectedDeckId) {
-                    this.props.getSelectedDeck(item);
-                  }
-                })
-              }
-            }}
-          />
-        {this.props.selectedDeck ? <Text style={{margin: 8}}>Deck Name: {this.props.selectedDeck.deckName}</Text> : <Text style={{margin: 8}}>No name</Text>}
-        {(this.props.selectedDeck &&  this.props.selectedDeck.questions.length > 0) ? <Text style={{margin: 8}}>Number of questions: {this.props.selectedDeck.questions.length}</Text> : <Text style={{margin: 8}}>Number of questions: 0</Text>}
-        {(this.props.selectedDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='#0D8797'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
-        {/* <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange'/></View> */}
-        <View style={{margin: 8}}><Button title="Add Question" color="#005466" onPress={() => { this.goToAddQuestion() }}/></View>
+      <Animated.View style={{ opacity, width }}>
+        <LinearGradient
+          colors={['#005466', '#0E0066']}
+          style={{width: '100%', height: 650 }}>
+          <NavigationEvents
+              onWillFocus={() => {
+                if(this.props.selectedDeckId) {
+                  this.props.deckList.forEach(item => {
+                    if(item.deckId === this.props.selectedDeckId) {
+                      this.props.getSelectedDeck(item);
+                    }
+                  })
+                }
+              }}
+            />
+          {this.props.selectedDeck ? <Text style={{margin: 8, color: 'white', fontSize: 24}}><Text style={{fontWeight: 'bold'}}>Deck Name:</Text> {this.props.selectedDeck.deckName}</Text> : <Text style={{margin: 8, color: 'white', fontSize: 24}}>No name</Text>}
+          {(this.props.selectedDeck &&  this.props.selectedDeck.questions.length > 0) ? <Text  style={{margin: 8, color: 'white', fontSize: 24}}><Text style={{fontWeight: 'bold'}}>Number of questions:</Text> {this.props.selectedDeck.questions.length}</Text> : <Text style={{margin: 8, color: 'white', fontSize: 24, fontWeight: 'bold'}}>Number of questions: 0</Text>}
+          {(this.props.selectedDeck && this.props.selectedDeck.questions.length > 0) ? <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='#0D8797'/></View> : <View style={{margin: 8}}><Button title="Start Quiz" onPress={() => { this.goToQuiz() }} color='orange' disabled={true}/></View>}
+          <View style={{margin: 8}}><Button title="Add Question" color="#005466" onPress={() => { this.goToAddQuestion() }}/></View>
+        </LinearGradient>
       </Animated.View>
     );
   }

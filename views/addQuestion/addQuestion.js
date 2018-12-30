@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, ScrollView, StyleSheet, TextInput, View, ToastAndroid } from 'react-native';
+import { LinearGradient } from 'expo';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
 import { addQuestion, getDecks } from '../../actions/decksAction';
 class AddQuestionScreen extends React.Component {
@@ -50,21 +51,25 @@ class AddQuestionScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.contentContainer}>
-        <Text style={styles.titleStyle}>Add Question</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 8}}
-          onChangeText={(question) => this.setState({question})}
-          value={this.state.question}
-        />
-        <Text style={styles.titleStyle}>Add Answer to question</Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1, margin: 8}}
-          onChangeText={(answer) => this.setState({answer})}
-          value={this.state.answer}
-        />
-        <View style={styles.buttonStyle}>
-          <Button title="Add Question" color="#005466" onPress={() => {this.saveQuestion({question: this.state.question, answer: this.state.answer, selectedDeckId: this.props.selectedDeck.deckId})}}/>
-        </View>
+        <LinearGradient
+          colors={['#005466', '#0E0066']}
+          style={{width: '100%', height: 650 }}>
+          <Text style={styles.titleStyle}>Add Question</Text>
+          <TextInput
+            style={{height: 40, backgroundColor: 'white', margin: 8}}
+            onChangeText={(question) => this.setState({question})}
+            value={this.state.question}
+          />
+          <Text style={styles.titleStyle}>Add Answer to question</Text>
+          <TextInput
+            style={{height: 40, backgroundColor: 'white', margin: 8}}
+            onChangeText={(answer) => this.setState({answer})}
+            value={this.state.answer}
+          />
+          <View style={styles.buttonStyle}>
+            <Button title="Add Question" color="#005466" onPress={() => {this.saveQuestion({question: this.state.question, answer: this.state.answer, selectedDeckId: this.props.selectedDeck.deckId})}}/>
+          </View>
+        </LinearGradient>
       </ScrollView>
     );
   }
@@ -77,6 +82,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: 'bold',
     textAlign: 'left',
+    color: 'white',
     fontSize: 16,
     paddingTop: 8,
     paddingLeft: 8

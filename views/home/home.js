@@ -54,7 +54,7 @@ class HomeScreen extends React.Component {
             <ScrollView horizontal={true} style={{ flexWrap: 'nowrap', flexDirection: 'row', height: 400 }}>
             { this.props.deckList.length > 0 ? this.props.deckList.map(item => {
             return (<DeckComponent deck={item} key={'dckcmp'+ item.deckId} navigate={this.props.navigation.navigate}/>);
-            }) : <View  style={{justifyContent: 'center', alignItems: 'center' }}><MaterialCommunityIcons name="cards-playing-outline" size={60} color='white' /><Text style={{margin: 8, fontWeight: 'bold', color: 'white', fontSize: 36}}>Sorry but no cards</Text></View> }
+            }) : <View  style={{justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}><MaterialCommunityIcons name="cards-playing-outline" size={60} color='white' /><Text style={{margin: 8, fontWeight: 'bold', color: 'white', fontSize: 24}}>Sorry you must add a Deck.</Text></View> }
           </ScrollView>
           { this.props.deckList.length > 0 && <View style={{marginBottom: 64}}><Button title="Delete all"  color="#B0231A" onPress={() => this.deleteAll()}/></View>}
         </LinearGradient>
