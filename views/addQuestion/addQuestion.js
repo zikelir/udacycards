@@ -44,7 +44,6 @@ class AddQuestionScreen extends React.Component {
         ToastAndroid.SHORT,
         ToastAndroid.CENTER,
       );
-      // alert('You must not submit an deck with empty title');
     }
   }
 

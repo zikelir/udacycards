@@ -45,7 +45,6 @@ class AddDeckScreen extends React.Component {
         );
         this.props.navigation.navigate('Deck');
     } else {
-      // alert('You must not submit an deck with empty title');
       ToastAndroid.showWithGravity(
         'You must not submit an deck with empty title!  😢😢😢😢',
         ToastAndroid.SHORT,

@@ -31,6 +31,7 @@ class QuizComponent extends React.Component {
   }
 
   componentWillMount() {
+    // animation for flipping the card
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
      this.animatedValue.addListener(({ value }) => {
@@ -59,6 +60,7 @@ class QuizComponent extends React.Component {
   }
 
   flipCard() {
+    //function to trigger the animation
     if (this.value >= 90) {
       Animated.spring(this.animatedValue,{
          toValue: 0,
@@ -92,23 +94,6 @@ class QuizComponent extends React.Component {
       ]
     }
     return (
-      // <View style={styles.quizCard}>
-      //   <Text style={{fontWeight: 'bold', textAlign: 'center'}}>{this.props.question ? this.props.question.question : 'No question'}</Text>
-      //   {this.answer()}
-      //   {
-      //     this.state.showAnswer === false
-      //     ?  <View style={{marginTop: 8}}><Button color="#005466" title="Show Answer" onPress={() => { this.showAnswer() }}/></View>
-      //     : <View style={{marginTop: 8}}><Button color="#005466" title="Hide Answer" onPress={() => { this.showAnswer() }}/></View>
-      //   }
-        // <View style={{flexDirection: 'row', marginTop: 8}}>
-        //   <View style={{width: '49%', marginRight: 8}}>
-        //     <Button title="Correct" color='#1AB04D' onPress={() => this.props.increment()}></Button>
-        //   </View>
-        //   <View style={{width: '49%'}}>
-        //     <Button title="Wrong" color='#B0231A' onPress={() => this.props.wrong()}></Button>
-        //   </View>
-        // </View>
-      // </View>
       <View style={styles.container}>
         <View>
         <Animated.View style={[styles.flipCard, frontAnimatedStyle, {opacity: this.frontOpacity}]}>
@@ -133,6 +118,23 @@ class QuizComponent extends React.Component {
           </View>
         </View>
       </View>
+      // <View style={styles.quizCard}>
+      //   <Text style={{fontWeight: 'bold', textAlign: 'center'}}>{this.props.question ? this.props.question.question : 'No question'}</Text>
+      //   {this.answer()}
+      //   {
+      //     this.state.showAnswer === false
+      //     ?  <View style={{marginTop: 8}}><Button color="#005466" title="Show Answer" onPress={() => { this.showAnswer() }}/></View>
+      //     : <View style={{marginTop: 8}}><Button color="#005466" title="Hide Answer" onPress={() => { this.showAnswer() }}/></View>
+      //   }
+        // <View style={{flexDirection: 'row', marginTop: 8}}>
+        //   <View style={{width: '49%', marginRight: 8}}>
+        //     <Button title="Correct" color='#1AB04D' onPress={() => this.props.increment()}></Button>
+        //   </View>
+        //   <View style={{width: '49%'}}>
+        //     <Button title="Wrong" color='#B0231A' onPress={() => this.props.wrong()}></Button>
+        //   </View>
+        // </View>
+      // </View>
     );
   }
 }
@@ -141,7 +143,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    // justifyContent: "center",
   },
   flipCard: {
     width: 350,

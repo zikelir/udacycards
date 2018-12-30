@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo';
 import { Button, Text, ScrollView, View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DeckComponent from '../../elements/deckComponent/DeckComponent';
-import { asyncGetDecks, asyncGetAll, initialArr, asyncDeleteDecks } from '../../utils/api';
+import { asyncGetDecks, initialArr, asyncDeleteDecks } from '../../utils/api';
 import { deleteDecks, getDecks } from '../../actions/decksAction';
 
 class HomeScreen extends React.Component {
