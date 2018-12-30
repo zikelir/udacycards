@@ -5,17 +5,26 @@ export const initialArr = async () => {
     await AsyncStorage.setItem('decks', JSON.stringify([]));
   } catch (error) {
     // Error saving data
-    alert(error);
+    // alert(error);
+    ToastAndroid.showWithGravity(
+      error,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
 export const asyncSaveDeck  = async (deck) => {
   try {
     await AsyncStorage.setItem('decks', JSON.stringify(deck));
-    alert('Deck Submited!!');
   } catch (error) {
     // Error saving data
-    alert(error);
+    // alert(error);
+    ToastAndroid.showWithGravity(
+      error,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
   }
 }
 
@@ -38,6 +47,10 @@ export const asyncGetAll = async () => {
 
 export const asyncDeleteDecks = async () => {
   const decks = await AsyncStorage.clear();
-  alert('deleted all decks');
+  ToastAndroid.showWithGravity(
+    'Deleted All Questions!!!  😢😢😢😢',
+    ToastAndroid.SHORT,
+    ToastAndroid.CENTER,
+  );
   return decks;
 }

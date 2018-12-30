@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
-import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
-import { addQuestion, getDecks, setSelectedDeckId } from '../../actions/decksAction';
+import { Button, Text, ScrollView, StyleSheet, View, ToastAndroid } from 'react-native';
+import { setSelectedDeckId } from '../../actions/decksAction';
 import QuizComponent from '../../elements/QuizComponent/QuizComponent';
 class QuizScreen extends React.Component {
   constructor(props) {
@@ -39,10 +38,20 @@ class QuizScreen extends React.Component {
 
   increment = () => {
     this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1, correct: this.state.correct + 1});
+    ToastAndroid.showWithGravity(
+      'Congratulations! 👏👏👏👏👏👏',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
   }
 
   wrong = () => {
     this.setState({answered: this.state.answered + 1, activeQuestion: this.state.activeQuestion + 1,})
+    ToastAndroid.showWithGravity(
+      'Don\'t give up! 💪💪💪💪💪💪',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
   }
 
   render() {

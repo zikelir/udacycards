@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { Button, Text, ScrollView, StyleSheet, TextInput, View,ToastAndroid } from 'react-native';
 import { asyncSaveDeck, asyncGetDecks } from '../../utils/api';
 import { addDeck, setSelectedDeckId, getDecks } from '../../actions/decksAction';
 class AddDeckScreen extends React.Component {
@@ -37,9 +37,19 @@ class AddDeckScreen extends React.Component {
         asyncSaveDeck(this.props.deckList);
         this.props.getSelectedDeck(deckId);
         this.props.getAllDecks();
+        ToastAndroid.showWithGravity(
+          'Deck submited! 👏',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
         this.props.navigation.navigate('Deck');
     } else {
-      alert('You must not submit an deck with empty title');
+      // alert('You must not submit an deck with empty title');
+      ToastAndroid.showWithGravity(
+        'You must not submit an deck with empty title!  😢😢😢😢',
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER,
+      );
     }
   }
 
